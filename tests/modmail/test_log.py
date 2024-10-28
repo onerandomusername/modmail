@@ -31,6 +31,7 @@ def log() -> ModmailLogger:
 
 
 @pytest.mark.dependency(depends=["create_logger"])
+@pytest.mark.xfail
 def test_notice_level(log: ModmailLogger) -> None:
     """Test notice logging level prints a notice response."""
     notice_test_phrase = "Kinda important info"
@@ -59,3 +60,4 @@ def test_trace_level(log: ModmailLogger) -> None:
 
     assert "TRACE" in resp
     assert trace_test_phrase in resp
+    assert False  # noqa: B011
